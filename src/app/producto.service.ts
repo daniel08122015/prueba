@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Producto } from './interface/Producto';
+import { Welcome } from './model/Producto';
+import { map } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
 
+  data : any;
+
   constructor(private http:HttpClient) { 
-
-    console.log("sevicio productos");
   }
 
 
-  url='https://pokeapi.co/api/v2/pokemon/ditto';
+  url='https://pokeapi.co/api/v2/pokemon';
 
-  getProductos(){
-    //return this.http.get<[Producto]>(this.url);
-    return this.http.get('https://pokeapi.co/api/v2/pokemon/');
 
-    //return this.http.get('https://pokeapi.co/api/v2/pokemon/ditto');
+
+  getPokemon(index:number) {
+    return this.http.get(`${this.url}/${index}/`);
   }
+
+  buscarPokemons(termino:string) {
+    return this.http.get(`${this.url}/${termino}/`);
+  }
+
 
 
 
